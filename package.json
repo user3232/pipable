@@ -1,0 +1,46 @@
+{
+  "name": "@user3232/pipable",
+  "version": "1.0.1",
+  "description": "Utilities for mapping objects and arrays",
+  "keywords": [
+    "pipe"
+  ],
+  "author": "kolodziej.michal %at% gmail.com",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/user3232/pipable"
+  },
+  "spec": "git+file:///home/mk/github/lib/pipable#semver:latest",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src",
+    "package.json",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "esbuild": "^0.23.1",
+    "tsx": "^4.17.0",
+    "typescript": "^5.5.4"
+  },
+  "scripts": {
+    "test": "tsx --test test/*.test.ts",
+    "build-js": "esbuild src/index.ts --bundle --outdir=lib --charset=utf8 --platform=node --format=esm --packages=external --analyze",
+    "build-dts": "tsc -p tsconfig.src.json",
+    "build": "npm run build-dts && npm run build-js",
+    "clean": "rm -rf lib",
+    "rebuild": "npm run clean && npm run build",
+    "dist": "npm run rebuild && npm run test"
+  }
+}
